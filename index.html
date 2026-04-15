@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bank UI Practice</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+    body { background-color: #f0f0f0; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+
+    /* The Mobile Container */
+    #app-container {
+      width: 375px; height: 812px; background-color: #2E7D32; 
+      box-shadow: 0 0 20px rgba(0,0,0,0.2); border-radius: 30px; 
+      overflow: hidden; position: relative; display: flex; flex-direction: column;
+    }
+
+    /* Screen Toggle Logic */
+    .screen { display: none; height: 100%; flex-direction: column; }
+    .screen.active { display: flex; }
+
+    /* --- UPDATED HEADER WITH LOGO --- */
+    .bank-header { 
+      display: flex; align-items: center; justify-content: space-between; 
+      padding: 12px 15px; color: white; background-color: #2E7D32; 
+    }
+    .header-left { display: flex; align-items: center; gap: 15px; font-size: 18px; }
+    
+    /* The Updated Logo Box (Larger Size) */
+    .logo-box {
+      background-color: white;
+      padding: 6px 12px;
+      border-radius: 6px;
+      height: 55px; 
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .logo-box img {
+      height: 100%; 
+      width: auto;
+    }
+    .power-icon { font-size: 20px; cursor: pointer; }
+
+    /* --- LOGIN SCREEN SPECIFICS --- */
+    .welcome-card { background: white; margin: 20px; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    .welcome-header { background: linear-gradient(to bottom, #A5D6A7, #66BB6A); text-align: center; padding: 15px; color: #1B5E20; }
+    .welcome-header h2 { font-size: 16px; font-weight: normal; }
+    .welcome-header p { font-size: 14px; font-weight: bold; margin-top: 5px; }
+
+    .login-body { padding: 20px; text-align: center; }
+    .mpin-label { color: #555; margin-bottom: 10px; }
+    .mpin-inputs { display: flex; justify-content: center; gap: 10px; margin-bottom: 15px; }
+    .pin-box { width: 40px; height: 40px; text-align: center; font-size: 20px; border: 1px solid #ccc; border-radius: 4px; }
+    .trouble-link { color: #1565C0; font-size: 12px; text-decoration: none; display: block; margin-bottom: 20px;}
+    #sign-in-btn { background-color: #FF9800; color: white; border: none; padding: 12px; width: 100%; border-radius: 6px; font-weight: bold; cursor: pointer; }
+    .call-us { text-align: center; padding: 15px; font-size: 12px; color: #1B5E20; }
+    .call-us a { text-decoration: underline; color: #1565C0;}
+
+    .bottom-nav { margin-top: auto; display: grid; grid-template-columns: repeat(4, 1fr); background: #1B5E20; color: white; padding: 15px 5px; text-align: center; font-size: 10px; }
+    .nav-item i { font-size: 20px; margin-bottom: 5px; display: block;}
+
+    /* --- DASHBOARD SCREEN SPECIFICS --- */
+    #dashboard-screen { background-color: #F5F5F5; }
+    .dashboard-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; padding: 20px; text-align: center; }
+    .grid-item span { font-size: 12px; color: #333; }
+    .icon-circle { width: 50px; height: 50px; background: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin: 0 auto 8px auto; box-shadow: 0 2px 5px rgba(0,0,0,0.1); font-size: 24px; }
+    .red-icon { color: #E53935; }
+    .orange-icon { color: #FF5722; }
+    .blue-icon { color: #1976D2; }
+
+    /* Account Cards */
+    .account-card { margin: 0 15px 15px 15px; background: white; border: 1px solid #E0E0E0; border-radius: 4px; }
+    .card-header { background: #EFEBE1; padding: 10px 15px; font-weight: bold; color: #333; }
+    .card-body { padding: 20px; text-align: center; }
+    .acc-num { color: #333; letter-spacing: 1px; margin-bottom: 5px; }
+    .acc-label { color: #9E9E9E; font-size: 12px; margin-bottom: 15px; }
+    .balance-row { display: flex; justify-content: center; align-items: center; gap: 10px; font-size: 18px; }
+    .eye-toggle { color: #FFC107; cursor: pointer; }
+  </style>
+</head>
+<body>
+
+  <div id="app-container">
+    
+    <div id="login-screen" class="screen active">
+      <header class="bank-header">
+        <div class="header-left">
+          <i class="fa-solid fa-bars"></i>
+          <i class="fa-solid fa-chevron-left"></i>
+        </div>
+        <div class="logo-box">
+          <img src="tgb-rrb-new-logo.png" alt="Tripura Gramin Bank">
+        </div>
+        <i class="fa-solid fa-power-off power-icon"></i>
+      </header>
+
+      <div class="welcome-card">
+        <div class="welcome-header">
+          <h2>WELCOME</h2>
+          <p>ANJAN SARKAR .</p>
+        </div>
+        <div class="login-body">
+          <p class="mpin-label">MPIN</p>
+          <div class="mpin-inputs">
+            <input type="password" maxlength="1" class="pin-box">
+            <input type="password" maxlength="1" class="pin-box">
+            <input type="password" maxlength="1" class="pin-box">
+            <input type="password" maxlength="1" class="pin-box">
+          </div>
+          <a href="#" class="trouble-link">Trouble signing in</a>
+          <button id="sign-in-btn">SIGN IN</button>
+        </div>
+        <div class="call-us">
+          <i class="fa-solid fa-phone"></i> Call us on <a>-18001807777</a>
+        </div>
+      </div>
+
+      <div class="bottom-nav">
+        <div class="nav-item"><i class="fa-solid fa-envelope"></i><span>Contact Us</span></div>
+        <div class="nav-item"><i class="fa-solid fa-user"></i><span>Know your User ID</span></div>
+        <div class="nav-item"><i class="fa-solid fa-circle-question"></i><span>FAQ</span></div>
+        <div class="nav-item"><i class="fa-solid fa-globe"></i><span>More</span></div>
+      </div>
+    </div>
+
+    <div id="dashboard-screen" class="screen">
+      <header class="bank-header">
+        <div class="header-left">
+          <i class="fa-solid fa-bars"></i>
+          <i class="fa-solid fa-chevron-left"></i>
+        </div>
+        <div class="logo-box">
+          <img src="tgb-rrb-new-logo.png" alt="Tripura Gramin Bank">
+        </div>
+        <i class="fa-solid fa-power-off power-icon"></i>
+      </header>
+
+      <div class="dashboard-grid">
+        <div class="grid-item"><div class="icon-circle"><i class="fa-solid fa-money-bill-transfer red-icon"></i></div><span>Fund Transfer</span></div>
+        <div class="grid-item"><div class="icon-circle"><i class="fa-solid fa-users red-icon"></i></div><span>My Payees</span></div>
+        <div class="grid-item empty"></div>
+        <div class="grid-item"><div class="icon-circle"><i class="fa-solid fa-credit-card orange-icon"></i></div><span>Debit Card</span></div>
+        <div class="grid-item"><div class="icon-circle"><i class="fa-solid fa-book orange-icon"></i></div><span>mPassBook</span></div>
+        <div class="grid-item"><div class="icon-circle"><i class="fa-solid fa-cubes orange-icon"></i></div><span>Services</span></div>
+        <div class="grid-item"><div class="icon-circle"><i class="fa-solid fa-bolt blue-icon"></i></div><span>Bills & Recharges</span></div>
+        <div class="grid-item"><div class="icon-circle"><i class="fa-solid fa-triangle-exclamation red-icon"></i></div><span>Emergency</span></div>
+      </div>
+
+      <div class="account-card">
+        <div class="card-header">Operative</div>
+        <div class="card-body">
+          <p class="acc-num">XXXX XXXX 5363</p>
+          <p class="acc-label">Available Balance</p>
+          <div class="balance-row">
+            <span id="operative-balance">*******</span>
+            <i class="fa-solid fa-eye eye-toggle" id="toggle-operative"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="account-card">
+        <div class="card-header">Loans</div>
+        <div class="card-body">
+          <p class="acc-num">XXXX XXXX 1335</p>
+          <p class="acc-label">Outstanding Balance</p>
+          <div class="balance-row">
+            <span id="loan-balance">*******</span>
+            <i class="fa-solid fa-eye-slash eye-toggle" id="toggle-loan"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // 1. Auto-focus MPIN Inputs
+    const pinBoxes = document.querySelectorAll('.pin-box');
+    pinBoxes.forEach((box, index) => {
+      box.addEventListener('input', () => {
+        if (box.value.length === 1 && index < pinBoxes.length - 1) {
+          pinBoxes[index + 1].focus();
+        }
+      });
+    });
+
+    // 2. Switch Screens
+    const signInBtn = document.getElementById('sign-in-btn');
+    const loginScreen = document.getElementById('login-screen');
+    const dashboardScreen = document.getElementById('dashboard-screen');
+
+    signInBtn.addEventListener('click', () => {
+      loginScreen.classList.remove('active');
+      dashboardScreen.classList.add('active');
+    });
+
+    // 3. Toggle Balances Logic
+    function setupToggle(toggleIconId, balanceSpanId, realBalance) {
+      const toggleIcon = document.getElementById(toggleIconId);
+      const balanceSpan = document.getElementById(balanceSpanId);
+      let isVisible = false;
+
+      toggleIcon.addEventListener('click', () => {
+        isVisible = !isVisible;
+        if (isVisible) {
+          balanceSpan.innerText = realBalance;
+          toggleIcon.classList.remove('fa-eye-slash');
+          toggleIcon.classList.add('fa-eye');
+        } else {
+          balanceSpan.innerText = '*******';
+          toggleIcon.classList.remove('fa-eye');
+          toggleIcon.classList.add('fa-eye-slash');
+        }
+      });
+    }
+
+    setupToggle('toggle-operative', 'operative-balance', 'INR 1000.10');
+    setupToggle('toggle-loan', 'loan-balance', 'INR -2,11,148.00');
+  </script>
+</body>
+</html>

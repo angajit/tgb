@@ -1,0 +1,118 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background-color: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* The Mobile Container */
+#app-container {
+  width: 375px;
+  height: 812px;
+  background-color: #2E7D32; /* Bank green background */
+  box-shadow: 0 0 20px rgba(0,0,0,0.2);
+  border-radius: 30px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Screen Toggle Logic */
+.screen { display: none; height: 100%; flex-direction: column; }
+.screen.active { display: flex; }
+
+/* Reusable Header */
+.bank-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 20px;
+  color: white;
+  background-color: #2E7D32;
+}
+.header-text h1 { font-size: 16px; font-weight: normal;}
+.header-text p { font-size: 12px; letter-spacing: 1px;}
+.power-icon { font-size: 20px; cursor: pointer; }
+
+/* --- LOGIN SCREEN SPECIFICS --- */
+.welcome-card {
+  background: white;
+  margin: 20px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+.welcome-header {
+  background: linear-gradient(to bottom, #A5D6A7, #66BB6A);
+  text-align: center;
+  padding: 15px;
+  color: #1B5E20;
+}
+.welcome-header h2 { font-size: 16px; font-weight: normal; }
+.welcome-header p { font-size: 14px; font-weight: bold; margin-top: 5px; }
+
+.login-body { padding: 20px; text-align: center; }
+.mpin-label { color: #555; margin-bottom: 10px; }
+.mpin-inputs { display: flex; justify-content: center; gap: 10px; margin-bottom: 15px; }
+.pin-box {
+  width: 40px; height: 40px;
+  text-align: center; font-size: 20px;
+  border: 1px solid #ccc; border-radius: 4px;
+}
+.trouble-link { color: #1565C0; font-size: 12px; text-decoration: none; display: block; margin-bottom: 20px;}
+#sign-in-btn {
+  background-color: #FF9800; color: white;
+  border: none; padding: 12px; width: 100%;
+  border-radius: 6px; font-weight: bold; cursor: pointer;
+}
+.call-us { text-align: center; padding: 15px; font-size: 12px; color: #1B5E20; }
+.call-us a { text-decoration: underline; color: #1565C0;}
+
+.bottom-nav {
+  margin-top: auto;
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  background: #1B5E20; color: white; padding: 15px 5px;
+  text-align: center; font-size: 10px;
+}
+.nav-item i { font-size: 20px; margin-bottom: 5px; display: block;}
+
+/* --- DASHBOARD SCREEN SPECIFICS --- */
+#dashboard-screen { background-color: #F5F5F5; }
+
+.dashboard-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 15px; padding: 20px; text-align: center;
+}
+.grid-item span { font-size: 12px; color: #333; }
+.icon-circle {
+  width: 50px; height: 50px;
+  background: white; border-radius: 50%;
+  display: flex; justify-content: center; align-items: center;
+  margin: 0 auto 8px auto; box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  font-size: 24px;
+}
+.red-icon { color: #E53935; }
+.orange-icon { color: #FF5722; }
+.blue-icon { color: #1976D2; }
+
+/* Account Cards */
+.account-card {
+  margin: 0 15px 15px 15px;
+  background: white; border: 1px solid #E0E0E0;
+  border-radius: 4px;
+}
+.card-header { background: #EFEBE1; padding: 10px 15px; font-weight: bold; color: #333; }
+.card-body { padding: 20px; text-align: center; }
+.acc-num { color: #333; letter-spacing: 1px; margin-bottom: 5px; }
+.acc-label { color: #9E9E9E; font-size: 12px; margin-bottom: 15px; }
+.balance-row { display: flex; justify-content: center; align-items: center; gap: 10px; font-size: 18px; }
+.eye-toggle { color: #FFC107; cursor: pointer; }
